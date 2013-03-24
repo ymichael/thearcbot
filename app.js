@@ -21,14 +21,14 @@ app.configure('development', function(){
 // // IRC Client
 // //
 var irc = require('irc');
-// var bot = new irc.Client('chat.freenode.net', 'arcbot', {
-//   // debug: true,
-//   channels: ['##arc3217 asdf']
-// });
+var bot = new irc.Client('chat.freenode.net', 'arcbot', {
+  // debug: true,
+  channels: ['##arc3217 asdf']
+});
 
-// bot.addListener('error', function(message) {
-//     console.log('error: ', message);
-// });
+bot.addListener('error', function(message) {
+    console.log('error: ', message);
+});
 
 //
 // parse message
@@ -52,8 +52,7 @@ var parse = function(message) {
 //
 app.post('/', function(req, res) {
   var message = parse(req.body.msg);
-  // bot.say('##arc3217', message);
-  console.log(message);
+  bot.say('##arc3217', message);
   res.send(200);
 });
 
