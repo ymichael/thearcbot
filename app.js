@@ -40,7 +40,7 @@ var say = function(message) {
 //
 // twss
 //
-twss.threshold = 0.7;
+twss.threshold = 0.9;
 bot.addListener('message', function(from, to, message) {
   if (twss.is(message)) {
     say("that's what she said.");
