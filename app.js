@@ -25,7 +25,7 @@ var CHANNEL = "##arc3217";
 //
 var bot = new irc.Client('chat.freenode.net', BOT_NICK, {
   // debug: true,
-  channels: ['##arc3217 asdf']
+  channels: ['##arc3217']
 });
 
 bot.addListener('error', function(message) {
