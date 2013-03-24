@@ -52,7 +52,8 @@ var parse = function(message) {
 //
 app.post('/', function(req, res) {
   var message = parse(req.body.msg);
-  bot.say('##arc3217', message);
+  // bot.say('##arc3217', message);
+  console.log(message);
   res.send(200);
 });
 
