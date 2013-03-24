@@ -43,7 +43,7 @@ var parse = function(message) {
   // color branch
   var re = new RegExp("\\(.+?\\)");
   var branch = re.exec(message)[0];
-  message = message.replace(branch, irc.colors.wrap("dark_red", branch));
+  message = message.replace(branch, irc.colors.wrap("dark_red", branch, "black"));
   return message;
 };
 
