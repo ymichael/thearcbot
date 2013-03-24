@@ -11,9 +11,7 @@
 #
 # see contrib/hooks/ for a sample, or uncomment the next line and
 # rename the file to "post-receive".
- 
-#. /usr/share/doc/git-core/contrib/hooks/post-receive-email
- 
+ #. /usr/share/doc/git-core/contrib/hooks/post-receive-email
 shout_to_irc(){
   oldrev=$(git rev-parse $1)
   oldrevtime=$(git log -1 --format="%at" $oldrev)
