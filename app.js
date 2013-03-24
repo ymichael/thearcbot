@@ -20,13 +20,15 @@ app.configure('development', function(){
 //
 // IRC Client
 //
-var irc = require('node-irc');
-var bot = new irc('irc.freenode.net', 6667, 'arcbot', 'arcbot');
-bot.connect();
-bot.on('ready', function() {
-  bot.join('##arc3217 asdf');
+var irc = require('irc');
+var bot = new irc.Client('chat.freenode.net', 'arcbot', {
+  channels: ['##arc3217 asdf'],
+  debug: true
 });
 
+bot.addListener('error', function(message) {
+    console.log('error: ', message);
+});
 //
 // handle incoming requests
 //
@@ -36,6 +38,7 @@ app.post('/', function(req, res) {
   res.send(200);
 });
 
+// start application
 http.createServer(app).listen(app.get('port'), function(){
   console.log("IRC bot listening on port " + app.get('port'));
 });
