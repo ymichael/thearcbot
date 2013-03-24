@@ -17,8 +17,22 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+//
+// IRC Client
+//
+var irc = require('node-irc');
+var bot = new irc('irc.freenode.net', 6667, 'arcbot', 'arcbot');
+bot.connect();
+bot.on('ready', function() {
+  bot.join('##arc3217 asdf');
+});
+
+//
+// handle incoming requests
+//
 app.post('/', function(req, res) {
-  console.log(req.body);
+  var message = req.body.msg;
+  bot.say('##arc3217', message);
   res.send(200);
 });
 
