@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# An example hook script for the "post-receive" event.
+#
+# The "post-receive" script is run after receive-pack has accepted a pack
+# and the repository has been updated.  It is passed arguments in through
+# stdin in the form
+#  <oldrev> <newrev> <refname>
+# For example:
+#  aa453216d1b3e49e7f6f98441fa56946ddcd6a20 68f7abf4e6f922807889f52bc043ecd31b79f814 refs/heads/master
+#
+# see contrib/hooks/ for a sample, or uncomment the next line and
+# rename the file to "post-receive".
+ 
+#. /usr/share/doc/git-core/contrib/hooks/post-receive-email
+ 
+shout_to_irc(){
+  oldrev=$(git rev-parse $1)
+  oldrevtime=$(git log -1 --format="%at" $oldrev)
+  newrev=$(git rev-parse $2)
+  currev=$(git rev-parse $2)
+  currevtime=$(git log -1 --format="%at" $currev)
+ 
+  refname="$3"
+  branch="${refname##*/}"
+ 
+  while [ $currevtime -gt $oldrevtime ]; do
+    oneline=$(git log -1 --format="%an pushed commit %h - %s" $currev)
+    
+    echo "msg=[$4 ($branch)]: $oneline"
+    curl -s -d "msg=($branch) $oneline" http://localhost:8000
+
+    currev=$(git log -2 --format="%H" $currev | tail -n 1)
+    currevtime=$(git log -1 --format="%at" $currev)
+  done
+}
+ 
+while read oldrev newrev refname; do
+  project=$(pwd)
+  project=${project##*/}
+  project=${project%.git}
+ 
+  if expr "$oldrev" : '0*$' >/dev/null; then
+    exit 0
+  elif expr "$newrev" : '0*$' >/dev/null; then
+    exit 0
+  else
+    shout_to_irc $oldrev $newrev $refname $project
+  fi
+done
