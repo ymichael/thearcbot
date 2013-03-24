@@ -17,18 +17,18 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-//
-// IRC Client
-//
+// //
+// // IRC Client
+// //
 var irc = require('irc');
-var bot = new irc.Client('chat.freenode.net', 'arcbot', {
-  // debug: true,
-  channels: ['##arc3217 asdf']
-});
+// var bot = new irc.Client('chat.freenode.net', 'arcbot', {
+//   // debug: true,
+//   channels: ['##arc3217 asdf']
+// });
 
-bot.addListener('error', function(message) {
-    console.log('error: ', message);
-});
+// bot.addListener('error', function(message) {
+//     console.log('error: ', message);
+// });
 
 //
 // parse message
@@ -43,7 +43,7 @@ var parse = function(message) {
   // color branch
   var re = new RegExp("\\(.+?\\)");
   var branch = re.exec(message)[0];
-  message = message.replace(branch, irc.colors.wrap(irc.colors.codes.dark_red, branch));
+  message = message.replace(branch, irc.colors.wrap("u000305", branch));
   return message;
 };
 
