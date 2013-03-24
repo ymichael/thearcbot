@@ -28,7 +28,7 @@ shout_to_irc(){
     oneline=$(git log -1 --format="%an pushed commit %h - %s" $currev)
     
     echo "msg=[$4 ($branch)]: $oneline"
-    curl -s -d "msg=($branch) $oneline" http://localhost:8000
+    curl -s -d "msg=($branch) $oneline" http://localhost:8282
 
     currev=$(git log -2 --format="%H" $currev | tail -n 1)
     currevtime=$(git log -1 --format="%at" $currev)
