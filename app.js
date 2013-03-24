@@ -22,18 +22,31 @@ app.configure('development', function(){
 //
 var irc = require('irc');
 var bot = new irc.Client('chat.freenode.net', 'arcbot', {
-  channels: ['##arc3217 asdf'],
-  debug: true
+  // debug: true,
+  channels: ['##arc3217 asdf']
 });
 
 bot.addListener('error', function(message) {
     console.log('error: ', message);
 });
+
+//
+// parse message
+//
+var parse = function(message) {
+  // irc handles.
+  message = message.replace("Michael Yong", "ymichael", "gi");
+  message = message.replace("Omer Iqbal", "olenhad", "gi");
+  message = message.replace("Jerome Cheng", "ayulin", "gi");
+  message = message.replace("Benedict Liang", "ben_", "gi");
+  return message;
+};
+
 //
 // handle incoming requests
 //
 app.post('/', function(req, res) {
-  var message = req.body.msg;
+  var message = parse(req.body.msg);
   bot.say('##arc3217', message);
   res.send(200);
 });
