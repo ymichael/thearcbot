@@ -39,6 +39,11 @@ var parse = function(message) {
   message = message.replace("Omer Iqbal", "olenhad", "gi");
   message = message.replace("Jerome Cheng", "ayulin", "gi");
   message = message.replace("Benedict Liang", "ben_", "gi");
+
+  // color branch
+  var re = new RegExp("\\(.+?\\)");
+  var branch = re.exec(message)[0];
+  message = message.replace(branch, irc.colors.wrap(irc.colors.codes.dark_red, branch));
   return message;
 };
 
