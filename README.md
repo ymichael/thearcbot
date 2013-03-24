@@ -9,7 +9,7 @@ the arcbot does the following:
 ## Usage Instructions
 - Move `post-receive` to `/path/to/repository/hooks/`
 - Change Constants in `app.js`
-	- BOT_NICK
+	- BOT\_NICK
 		- bot's nick
 	- CHANNEL
 		- Channel that thearcbot is subscribed to
@@ -17,3 +17,4 @@ the arcbot does the following:
 		- key-value pair of names and IRC nicks to trigger IRC notification
 	- MSGES
 		- An array of greetings
+- Run `app.js` to listen for requests (post-receive hook curls the application)
