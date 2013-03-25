@@ -56,7 +56,7 @@ var MSGES = [
   "Back so soon?",
   "Can I get you anything?",
   "How are you feeling today?",
-  "Reading to get coding?"
+  "Ready to get coding?"
 ];
 var greeting = function() {
   return MSGES[Math.floor(Math.random() * (MSGES.length - 1))];
