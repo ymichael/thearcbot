@@ -43,7 +43,7 @@ var say = function(message) {
 twss.threshold = 0.9;
 bot.addListener('message', function(from, to, message) {
   console.log(message);
-  if (message.length > 20 && twss.is(message) && Math.random() > 0.7) {
+  if (message.length > 30 && twss.is(message) && Math.random() > 0.9) {
     say("that's what she said.");
   }
 });
